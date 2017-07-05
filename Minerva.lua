@@ -29,6 +29,20 @@ function ChatFrame_OnEvent(event)
   Original_ChatFrame_OnEvent(event);
 end
 
+-- https://www.townlong-yak.com/framexml/1.12.1/UnitPopup.lua#261
+local Original_UnitPopup_HideButtons = UnitPopup_HideButtons;
+function UnitPopup_HideButtons()
+  Original_UnitPopup_HideButtons();
+  local dropdownMenu = getglobal(UIDROPDOWNMENU_INIT_MENU);
+  for index, value in UnitPopupMenus[dropdownMenu.which] do
+    if ( value == "GONAME" ) then
+      if ( dropdownMenu.name == UnitName("player") ) then
+        UnitPopupShown[index] = 0;
+      end
+    end
+  end
+end
+
 -- https://www.townlong-yak.com/framexml/1.12.1/UnitPopup.lua#536
 local Original_UnitPopup_OnClick = UnitPopup_OnClick;
 function UnitPopup_OnClick()
