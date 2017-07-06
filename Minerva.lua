@@ -34,6 +34,8 @@ function ChatFrame_OnEvent(event)
   if ( event == "CHAT_MSG_SYSTEM" ) then
     if ( arg1 == MSG_GOLD ) then
       return;
+    elseif ( string.match(arg1, format(MSG_WELCOME, GetRealmName())) and FILTER_SYSTEM_WELCOME ) then
+      FILTER_SYSTEM_WELCOME = false;
       return;
     end
   elseif ( event == "GUILD_MOTD" ) then
