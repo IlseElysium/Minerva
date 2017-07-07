@@ -47,6 +47,24 @@ function ChatFrame_OnEvent(event)
   Original_ChatFrame_OnEvent(event);
 end
 
+-- http://wowwiki.wikia.com/wiki/AddOn_loading_process
+local Frame = CreateFrame("Frame");
+local Event = false;
+Frame:RegisterEvent("SPELLS_CHANGED");
+Frame:RegisterEvent("PLAYER_LOGIN");
+Frame:SetScript("OnEvent", function()
+  if ( event == "SPELLS_CHANGED" ) then
+    Frame:UnregisterEvent("SPELLS_CHANGED");
+    Event = true;
+  elseif ( event == "PLAYER_LOGIN" ) then
+    Frame:UnregisterEvent("PLAYER_LOGIN");
+    FILTER_GUILD_MOTD = false;
+    if ( not Event ) then
+      FILTER_SYSTEM_WELCOME = false;
+    end
+  end
+end)
+
 -- https://www.townlong-yak.com/framexml/1.12.1/UnitPopup.lua#261
 local Original_UnitPopup_HideButtons = UnitPopup_HideButtons;
 function UnitPopup_HideButtons()
