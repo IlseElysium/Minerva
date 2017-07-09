@@ -21,6 +21,13 @@ SlashCmdList["RL"] = function()
   ReloadUI();
 end
 
+-- https://www.townlong-yak.com/framexml/1.12.1/GlobalStrings.lua#3486
+SLASH_HOME1 = "/home";
+-- https://www.townlong-yak.com/framexml/1.12.1/ChatFrame.lua#669
+SlashCmdList["HOME"] = function()
+  SendChatMessage(".go xyzo 971 561 210 2.9 37");
+end
+
 function string.match(str, pattern)
   -- https://www.lua.org/pil/20.1.html
   local _, count = string.gsub(str, "^("..pattern..")$", "%1");
