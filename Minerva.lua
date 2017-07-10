@@ -1,33 +1,4 @@
--- https://www.townlong-yak.com/framexml/1.12.1/ChatFrame.lua#1784
-ChatFrameEditBox.chatType = "GUILD";
-ChatFrameEditBox.stickyType = "GUILD";
-
--- https://www.townlong-yak.com/framexml/1.12.1/GlobalStrings.lua
-FILTER_GUILD_MOTD = true;
-FILTER_SYSTEM_WELCOME = true;
-GONAME = "Goname";
-MSG_GOLD = "Gold sellers thrive on compromised accounts and our tools for detecting gold buying and tracing gold and items are better than their techniques for preventing buyers from being banned. Help us thwart gold selling by enabling two-factor authentication on your account and by not supporting gold buying. Friends don't let friends buy gold.";
-MSG_WELCOME = "Welcome to the %s Pv[EP] Realm!";
-
--- https://www.townlong-yak.com/framexml/1.12.1/UnitPopup.lua#12
-UnitPopupButtons["GONAME"] = { text = TEXT(GONAME), dist = 0 };
--- https://www.townlong-yak.com/framexml/1.12.1/UnitPopup.lua#74
-UnitPopupMenus["FRIEND"] = { "WHISPER", "INVITE", "TARGET", "GUILD_PROMOTE", "GUILD_LEAVE", "GONAME", "CANCEL" };
-
--- https://www.townlong-yak.com/framexml/1.12.1/GlobalStrings.lua#3486
-SLASH_RL1 = "/rl";
--- https://www.townlong-yak.com/framexml/1.12.1/ChatFrame.lua#669
-SlashCmdList["RL"] = function()
-  ReloadUI();
-end
-
--- https://www.townlong-yak.com/framexml/1.12.1/GlobalStrings.lua#3486
-SLASH_HOME1 = "/home";
--- https://www.townlong-yak.com/framexml/1.12.1/ChatFrame.lua#669
-SlashCmdList["HOME"] = function()
-  SendChatMessage(".go xyzo 971 561 210 2.9 37");
-end
-
+-- http://wowprogramming.com/docs/api/gmatch
 function string.match(str, pattern)
   -- https://www.lua.org/pil/20.1.html
   local _, count = string.gsub(str, "^("..pattern..")$", "%1");
@@ -35,30 +6,25 @@ function string.match(str, pattern)
   return count == 1 and true or false;
 end
 
--- https://www.townlong-yak.com/framexml/1.12.1/ChatFrame.lua#1260
-local Original_ChatFrame_OnEvent = ChatFrame_OnEvent;
-function ChatFrame_OnEvent(event)
-  if ( event == "CHAT_MSG_SYSTEM" ) then
-    if ( arg1 == MSG_GOLD ) then
-      return;
-    elseif ( string.match(arg1, format(MSG_WELCOME, GetRealmName())) and FILTER_SYSTEM_WELCOME ) then
-      FILTER_SYSTEM_WELCOME = false;
-      return;
-    end
-  elseif ( event == "GUILD_MOTD" ) then
-    if ( FILTER_GUILD_MOTD ) then
-      FILTER_GUILD_MOTD = false;
-      return;
-    end
-  end
-  Original_ChatFrame_OnEvent(event);
-end
+-- https://www.townlong-yak.com/framexml/1.12.1/GlobalStrings.lua
+FILTER_GUILD_MOTD = true;
+FILTER_SYSTEM_WELCOME = true;
+
+GONAME = "Goname";
+
+MSG_GOLD = "Gold sellers thrive on compromised accounts and our tools for detecting gold buying and tracing gold and items are better than their techniques for preventing buyers from being banned. Help us thwart gold selling by enabling two-factor authentication on your account and by not supporting gold buying. Friends don't let friends buy gold.";
+MSG_WELCOME = "Welcome to the %s Pv[EP] Realm!";
+
+SLASH_HOME1 = "/home";
+SLASH_RL1 = "/rl";
 
 -- http://wowwiki.wikia.com/wiki/AddOn_loading_process
 local Frame = CreateFrame("Frame");
 local Event = false;
+
 Frame:RegisterEvent("SPELLS_CHANGED");
 Frame:RegisterEvent("PLAYER_LOGIN");
+
 Frame:SetScript("OnEvent", function()
   if ( event == "SPELLS_CHANGED" ) then
     Frame:UnregisterEvent("SPELLS_CHANGED");
@@ -71,6 +37,12 @@ Frame:SetScript("OnEvent", function()
     end
   end
 end)
+
+-- https://www.townlong-yak.com/framexml/1.12.1/UnitPopup.lua#12
+UnitPopupButtons["GONAME"] = { text = TEXT(GONAME), dist = 0 };
+
+-- https://www.townlong-yak.com/framexml/1.12.1/UnitPopup.lua#74
+UnitPopupMenus["FRIEND"] = { "WHISPER", "INVITE", "TARGET", "GUILD_PROMOTE", "GUILD_LEAVE", "GONAME", "CANCEL" };
 
 -- https://www.townlong-yak.com/framexml/1.12.1/UnitPopup.lua#261
 local Original_UnitPopup_HideButtons = UnitPopup_HideButtons;
@@ -94,3 +66,35 @@ function UnitPopup_OnClick()
   end
   Original_UnitPopup_OnClick();
 end
+
+-- https://www.townlong-yak.com/framexml/1.12.1/ChatFrame.lua#669
+SlashCmdList["HOME"] = function()
+  SendChatMessage(".go xyzo 971 561 210 2.9 37");
+end
+
+SlashCmdList["RL"] = function()
+  ReloadUI();
+end
+
+-- https://www.townlong-yak.com/framexml/1.12.1/ChatFrame.lua#1260
+local Original_ChatFrame_OnEvent = ChatFrame_OnEvent;
+function ChatFrame_OnEvent(event)
+  if ( event == "CHAT_MSG_SYSTEM" ) then
+    if ( arg1 == MSG_GOLD ) then
+      return;
+    elseif ( string.match(arg1, format(MSG_WELCOME, GetRealmName())) and FILTER_SYSTEM_WELCOME ) then
+      FILTER_SYSTEM_WELCOME = false;
+      return;
+    end
+  elseif ( event == "GUILD_MOTD" ) then
+    if ( FILTER_GUILD_MOTD ) then
+      FILTER_GUILD_MOTD = false;
+      return;
+    end
+  end
+  Original_ChatFrame_OnEvent(event);
+end
+
+-- https://www.townlong-yak.com/framexml/1.12.1/ChatFrame.lua#1784
+ChatFrameEditBox.chatType = "GUILD";
+ChatFrameEditBox.stickyType = "GUILD";
