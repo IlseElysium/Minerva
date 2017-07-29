@@ -1,0 +1,244 @@
+<Ui>
+  <Frame name="MinervaButtonTemplate" virtual="true">
+    <Size x="288" y="20"/>
+    <Anchors>
+      <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+        <Offset>
+          <AbsDimension x="0" y="-6"/>
+        </Offset>
+      </Anchor>
+    </Anchors>
+    <Layers>
+      <Layer level="BACKGROUND">
+        <Texture name="$parentBorder">
+          <Color r="0.12109375" g="0.1328125" b="0.14453125"/>
+        </Texture>
+      </Layer>
+      <Layer level="BORDER">
+        <Texture name="$parentBackground">
+          <Color r="0.234375" g="0.25390625" b="0.2734375"/>
+          <Size x="286" y="18"/>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="1" y="-1"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </Texture>
+      </Layer>
+    </Layers>
+  </Frame>
+  <FontString name="MinervaTicketTemplate" inherits="GameFontNormal" justifyH="LEFT" virtual="true">
+    <Anchors>
+      <Anchor point="LEFT">
+        <Offset>
+          <AbsDimension x="3" y="2"/>
+        </Offset>
+      </Anchor>
+    </Anchors>
+  </FontString>
+  <Frame name="MinervaFrame" parent="UIParent" enableMouse="true" movable="true">
+    <Size x="300" y="371"/>
+    <Anchors>
+      <Anchor point="CENTER"/>
+    </Anchors>
+    <Layers>
+      <Layer>
+        <Texture>
+          <Color r="0.2109375" g="0.22265625" b="0.2421875"/>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Frames>
+      <Frame name="MinervaButton1" parent="MinervaFrame" inherits="MinervaButtonTemplate">
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+            <Offset>
+              <AbsDimension x="6" y="-6"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 1" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton2" parent="MinervaButton1" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 2" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton3" parent="MinervaButton2" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 3" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton4" parent="MinervaButton3" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 4" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton5" parent="MinervaButton4" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 5" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton6" parent="MinervaButton5" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 6" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton7" parent="MinervaButton6" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 7" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton8" parent="MinervaButton7" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 8" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton9" parent="MinervaButton8" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 9" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton10" parent="MinervaButton9" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 10" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton11" parent="MinervaButton10" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 11" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButton12" parent="MinervaButton11" inherits="MinervaButtonTemplate">
+        <Layers>
+          <Layer level="ARTWORK">
+            <FontString name="$parentTicket" text="Ticket 12" inherits="MinervaTicketTemplate"/>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaLine" parent="MinervaFrame">
+        <Size x="50" y="1"/>
+        <Anchors>
+          <Anchor point="BOTTOM" relativePoint="BOTTOM">
+            <Offset>
+              <AbsDimension x="0" y="48"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <Texture name="$parentBorder">
+              <Color r="0.30859375" g="0.328125" b="0.359375"/>
+            </Texture>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButtonNope" parent="MinervaButton12">
+        <Size x="65" y="22"/>
+        <Anchors>
+          <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+            <Offset>
+              <AbsDimension x="75" y="-31"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <Texture name="$parentBorder">
+              <Color r="0.28125" g="0.29296875" b="0.31640625"/>
+            </Texture>
+          </Layer>
+          <Layer level="BORDER">
+            <Texture name="$parentBackground">
+              <Color r="0.2109375" g="0.22265625" b="0.2421875"/>
+              <Size x="63" y="20"/>
+              <Anchors>
+                <Anchor point="TOPLEFT">
+                  <Offset>
+                    <AbsDimension x="1" y="-1"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </Texture>
+          </Layer>
+          <Layer level="ARTWORK">
+            <FontString name="$parentText" inherits="GameFontHighlight" text="Nope" justifyH="CENTER">
+              <Anchors>
+                <Anchor point="CENTER">
+                  <Offset>
+                    <AbsDimension x="-1" y="1"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+      <Frame name="MinervaButtonContinue" parent="MinervaButtonNope">
+        <Size x="65" y="22"/>
+        <Anchors>
+          <Anchor point="LEFT" relativePoint="RIGHT">
+            <Offset>
+              <AbsDimension x="8" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+        <Layers>
+          <Layer level="BACKGROUND">
+            <Texture name="$parentBackground">
+              <Color r="0.63671875" g="0.1875" b="0.1875"/>
+            </Texture>
+          </Layer>
+          <Layer level="BORDER">
+            <FontString name="$parentText" inherits="GameFontHighlight" text="Continue" justifyH="CENTER">
+              <Anchors>
+                <Anchor point="CENTER">
+                  <Offset>
+                    <AbsDimension x="-1" y="1"/>
+                  </Offset>
+                </Anchor>
+              </Anchors>
+            </FontString>
+          </Layer>
+        </Layers>
+      </Frame>
+    </Frames>
+    <Scripts>
+      <OnLoad>
+        this:RegisterForDrag("LeftButton");
+      </OnLoad>
+      <OnDragStart>
+        this:StartMoving();
+      </OnDragStart>
+      <OnDragStop>
+        this:StopMovingOrSizing();
+      </OnDragStop>
+    </Scripts>
+  </Frame>
+</Ui>
