@@ -33,7 +33,7 @@
     <Anchors>
       <Anchor point="LEFT">
         <Offset>
-          <AbsDimension x="3" y="2"/>
+          <AbsDimension x="4" y="1"/>
         </Offset>
       </Anchor>
     </Anchors>
@@ -61,84 +61,84 @@
         </Anchors>
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 1" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton2" parent="MinervaButton1" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 2" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton3" parent="MinervaButton2" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 3" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton4" parent="MinervaButton3" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 4" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton5" parent="MinervaButton4" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 5" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton6" parent="MinervaButton5" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 6" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton7" parent="MinervaButton6" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 7" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton8" parent="MinervaButton7" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 8" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton9" parent="MinervaButton8" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 9" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton10" parent="MinervaButton9" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 10" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton11" parent="MinervaButton10" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 11" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
       <Frame name="MinervaButton12" parent="MinervaButton11" inherits="MinervaButtonTemplate">
         <Layers>
           <Layer level="ARTWORK">
-            <FontString name="$parentTicket" text="Ticket 12" inherits="MinervaTicketTemplate"/>
+            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
           </Layer>
         </Layers>
       </Frame>
@@ -289,6 +289,7 @@
     </Frames>
     <Scripts>
       <OnLoad>
+        SendChatMessage(".ticket list");
         this:RegisterForDrag("LeftButton");
       </OnLoad>
       <OnDragStart>

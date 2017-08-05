@@ -9,6 +9,7 @@ end
 -- https://www.townlong-yak.com/framexml/1.12.1/GlobalStrings.lua
 FILTER_GUILD_MOTD = true;
 FILTER_SYSTEM_WELCOME = true;
+FILTER_TICKETS = true;
 
 GONAME = "Goname";
 
@@ -85,6 +86,23 @@ function ChatFrame_OnEvent(event)
     elseif ( string.match(arg1, format(MSG_WELCOME, GetRealmName())) and FILTER_SYSTEM_WELCOME ) then
       FILTER_SYSTEM_WELCOME = false;
       return;
+    elseif ( arg1 == "Showing list of open tickets." ) then
+      if ( TICKETS_AMMOUNT ) then
+        FILTER_TICKETS = false;
+      end
+      TICKETS_AMMOUNT = 1;
+      if ( FILTER_TICKETS ) then
+        return;
+      end
+    elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+0dhms]- ago|r.*") ) then
+      local ticketNumber = string.gsub(arg1, "|cffaaffaaTicket|r:|cffaaccff (%d+).+", "%1");
+      if ( TICKETS_AMMOUNT <= 12 ) then
+        getglobal("MinervaButton"..TICKETS_AMMOUNT.."Ticket"):SetText(ticketNumber);
+      end
+      TICKETS_AMMOUNT = TICKETS_AMMOUNT + 1;
+      if ( FILTER_TICKETS ) then
+        return;
+      end
     end
   elseif ( event == "GUILD_MOTD" ) then
     if ( FILTER_GUILD_MOTD ) then
