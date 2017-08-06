@@ -105,6 +105,12 @@ function ChatFrame_OnEvent(event)
       if ( FILTER_TICKETS ) then
         return;
       end
+    elseif ( string.match(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+.|r |cff00ff00Ticket entry:|r|cffff00ff %d+.|r") ) then
+      local ticketNumber = string.gsub(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+.|r |cff00ff00Ticket entry:|r|cffff00ff (%d+).|r", "%1");
+      if ( TICKETS_AMMOUNT <= 12 ) then
+        getglobal("MinervaButton"..TICKETS_AMMOUNT.."Ticket"):SetText(ticketNumber);
+      end
+      TICKETS_AMMOUNT = TICKETS_AMMOUNT + 1;
     end
   elseif ( event == "GUILD_MOTD" ) then
     if ( FILTER_GUILD_MOTD ) then
