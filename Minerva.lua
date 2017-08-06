@@ -31,11 +31,13 @@ Frame:SetScript("OnEvent", function()
     Frame:UnregisterEvent("SPELLS_CHANGED");
     Event = true;
   elseif ( event == "PLAYER_LOGIN" ) then
+    Frame:UnregisterEvent("SPELLS_CHANGED");
     Frame:UnregisterEvent("PLAYER_LOGIN");
     FILTER_GUILD_MOTD = false;
     if ( not Event ) then
       FILTER_SYSTEM_WELCOME = false;
     end
+    SendChatMessage(".ticket list");
   end
 end)
 
@@ -94,7 +96,7 @@ function ChatFrame_OnEvent(event)
       if ( FILTER_TICKETS ) then
         return;
       end
-    elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+0dhms]- ago|r.*") ) then
+    elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+0dhms]- ago|r.*") and not string.match(arg1, ".*Ticket Message.*") ) then
       local ticketNumber = string.gsub(arg1, "|cffaaffaaTicket|r:|cffaaccff (%d+).+", "%1");
       if ( TICKETS_AMMOUNT <= 12 ) then
         getglobal("MinervaButton"..TICKETS_AMMOUNT.."Ticket"):SetText(ticketNumber);

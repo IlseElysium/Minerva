@@ -289,7 +289,6 @@
     </Frames>
     <Scripts>
       <OnLoad>
-        SendChatMessage(".ticket list");
         this:RegisterForDrag("LeftButton");
       </OnLoad>
       <OnDragStart>
