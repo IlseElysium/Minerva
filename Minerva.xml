@@ -27,6 +27,9 @@
           </Anchors>
         </Texture>
       </Layer>
+      <Layer level="ARTWORK">
+        <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
+      </Layer>
     </Layers>
     <Scripts>
       <OnEnter>
@@ -94,89 +97,18 @@
             </Offset>
           </Anchor>
         </Anchors>
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
       </Button>
-      <Button name="MinervaButton2" parent="MinervaButton1" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton3" parent="MinervaButton2" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton4" parent="MinervaButton3" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton5" parent="MinervaButton4" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton6" parent="MinervaButton5" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton7" parent="MinervaButton6" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton8" parent="MinervaButton7" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton9" parent="MinervaButton8" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton10" parent="MinervaButton9" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton11" parent="MinervaButton10" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
-      <Button name="MinervaButton12" parent="MinervaButton11" inherits="MinervaButtonTemplate">
-        <Layers>
-          <Layer level="ARTWORK">
-            <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
-          </Layer>
-        </Layers>
-      </Button>
+      <Button name="MinervaButton2" parent="MinervaButton1" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton3" parent="MinervaButton2" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton4" parent="MinervaButton3" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton5" parent="MinervaButton4" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton6" parent="MinervaButton5" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton7" parent="MinervaButton6" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton8" parent="MinervaButton7" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton9" parent="MinervaButton8" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton10" parent="MinervaButton9" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton11" parent="MinervaButton10" inherits="MinervaButtonTemplate"/>
+      <Button name="MinervaButton12" parent="MinervaButton11" inherits="MinervaButtonTemplate"/>
       <Frame name="MinervaLine" parent="MinervaFrame">
         <Size x="50" y="1"/>
         <Anchors>
