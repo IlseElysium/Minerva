@@ -30,25 +30,35 @@
     </Layers>
     <Scripts>
       <OnEnter>
-        getglobal(this:GetName().."Background"):SetTexture(0.63671875, 0.1875, 0.1875);
-        getglobal(this:GetName().."Border"):SetTexture(0, 0, 0);
+        if ( getglobal(this:GetName().."Ticket"):GetText() ) then
+          getglobal(this:GetName().."Background"):SetTexture(0.63671875, 0.1875, 0.1875);
+          getglobal(this:GetName().."Border"):SetTexture(0, 0, 0);
+        end
       </OnEnter>
       <OnLeave>
-        getglobal(this:GetName().."Background"):SetTexture(0.234375, 0.25390625, 0.2734375);
-        getglobal(this:GetName().."Border"):SetTexture(0.12109375, 0.1328125, 0.14453125);
+        if ( getglobal(this:GetName().."Ticket"):GetText() ) then
+          getglobal(this:GetName().."Background"):SetTexture(0.234375, 0.25390625, 0.2734375);
+          getglobal(this:GetName().."Border"):SetTexture(0.12109375, 0.1328125, 0.14453125);
+        end
       </OnLeave>
       <OnMouseDown>
-        if ( arg1 == "LeftButton" ) then
-          getglobal(this:GetName().."Ticket"):SetTextColor(1, 1, 1);
+        if ( getglobal(this:GetName().."Ticket"):GetText() ) then
+          if ( arg1 == "LeftButton" ) then
+            getglobal(this:GetName().."Ticket"):SetTextColor(1, 1, 1);
+          end
         end
       </OnMouseDown>
       <OnMouseUp>
-        if ( arg1 == "LeftButton" ) then
-          getglobal(this:GetName().."Ticket"):SetTextColor(1, 0.82, 0);
+        if ( getglobal(this:GetName().."Ticket"):GetText() ) then
+          if ( arg1 == "LeftButton" ) then
+            getglobal(this:GetName().."Ticket"):SetTextColor(1, 0.82, 0);
+          end
         end
       </OnMouseUp>
       <OnClick>
-        SendChatMessage(".ticket "..getglobal(this:GetName().."Ticket"):GetText());
+        if ( getglobal(this:GetName().."Ticket"):GetText() ) then
+          SendChatMessage(".ticket "..getglobal(this:GetName().."Ticket"):GetText());
+        end
       </OnClick>
     </Scripts>
   </Button>
