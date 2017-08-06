@@ -100,6 +100,10 @@ function ChatFrame_OnEvent(event)
       local ticketNumber = string.gsub(arg1, "|cffaaffaaTicket|r:|cffaaccff (%d+).+", "%1");
       if ( TICKETS_AMMOUNT <= 12 ) then
         getglobal("MinervaButton"..TICKETS_AMMOUNT.."Ticket"):SetText(ticketNumber);
+        if ( MinervaFrame.area and (tonumber((string.gsub(MinervaFrame.area:GetName(), "MinervaButton(%d+)", "%1"))) == TICKETS_AMMOUNT) ) then
+          getglobal(MinervaFrame.area:GetName().."Background"):SetTexture(0.63671875, 0.1875, 0.1875);
+          getglobal(MinervaFrame.area:GetName().."Border"):SetTexture(0, 0, 0);
+        end
       end
       TICKETS_AMMOUNT = TICKETS_AMMOUNT + 1;
       if ( FILTER_TICKETS ) then

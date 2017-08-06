@@ -30,12 +30,14 @@
     </Layers>
     <Scripts>
       <OnEnter>
+        MinervaFrame.area = this;
         if ( getglobal(this:GetName().."Ticket"):GetText() ) then
           getglobal(this:GetName().."Background"):SetTexture(0.63671875, 0.1875, 0.1875);
           getglobal(this:GetName().."Border"):SetTexture(0, 0, 0);
         end
       </OnEnter>
       <OnLeave>
+        MinervaFrame.area = nil;
         if ( getglobal(this:GetName().."Ticket"):GetText() ) then
           getglobal(this:GetName().."Background"):SetTexture(0.234375, 0.25390625, 0.2734375);
           getglobal(this:GetName().."Border"):SetTexture(0.12109375, 0.1328125, 0.14453125);
