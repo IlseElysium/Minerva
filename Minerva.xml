@@ -68,6 +68,7 @@
         if ( getglobal(this:GetName().."Ticket"):GetText() ) then
           if ( arg1 == "LeftButton" ) then
             getglobal(this:GetName().."Ticket"):SetTextColor(1, 1, 1);
+            getglobal(this:GetName().."Owner"):SetTextColor(1, 1, 1);
           end
         end
       </OnMouseDown>
@@ -75,6 +76,7 @@
         if ( getglobal(this:GetName().."Ticket"):GetText() ) then
           if ( arg1 == "LeftButton" ) then
             getglobal(this:GetName().."Ticket"):SetTextColor(1, 0.82, 0);
+            getglobal(this:GetName().."Owner"):SetTextColor(1, 0.82, 0);
           end
         end
       </OnMouseUp>
