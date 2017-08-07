@@ -277,7 +277,24 @@
     <Scripts>
       <OnLoad>
         this:RegisterForDrag("LeftButton");
+        this:RegisterEvent("SPELLS_CHANGED");
+        this:RegisterEvent("PLAYER_LOGIN");
+        local Event = false;
       </OnLoad>
+      <OnEvent>
+        if ( event == "SPELLS_CHANGED" ) then
+          this:UnregisterEvent("SPELLS_CHANGED");
+          Event = true;
+        elseif ( event == "PLAYER_LOGIN" ) then
+          this:UnregisterEvent("SPELLS_CHANGED");
+          this:UnregisterEvent("PLAYER_LOGIN");
+          FILTER_GUILD_MOTD = false;
+          if ( not Event ) then
+            FILTER_SYSTEM_WELCOME = false;
+          end
+          SendChatMessage(".ticket list");
+        end
+      </OnEvent>
       <OnDragStart>
         this:StartMoving();
       </OnDragStart>
