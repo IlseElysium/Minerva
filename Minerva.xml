@@ -28,7 +28,25 @@
         </Texture>
       </Layer>
       <Layer level="ARTWORK">
-        <FontString name="$parentTicket" inherits="MinervaTicketTemplate"/>
+        <FontString name="$parentTicket" inherits="GameFontNormal" justifyH="LEFT">
+          <Size x="50" y="12"/>
+          <Anchors>
+            <Anchor point="LEFT">
+              <Offset>
+                <AbsDimension x="4" y="1"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+        <FontString name="$parentOwner" inherits="GameFontNormal" justifyH="LEFT">
+          <Anchors>
+            <Anchor point="LEFT" relativeTo="$parentTicket" relativePoint="RIGHT">
+              <Offset>
+                <AbsDimension x="4" y="0"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
       </Layer>
     </Layers>
     <Scripts>
@@ -67,15 +85,6 @@
       </OnClick>
     </Scripts>
   </Button>
-  <FontString name="MinervaTicketTemplate" inherits="GameFontNormal" justifyH="LEFT" virtual="true">
-    <Anchors>
-      <Anchor point="LEFT">
-        <Offset>
-          <AbsDimension x="4" y="1"/>
-        </Offset>
-      </Anchor>
-    </Anchors>
-  </FontString>
   <Frame name="MinervaFrame" parent="UIParent" enableMouse="true" movable="true">
     <Size x="300" y="371"/>
     <Anchors>

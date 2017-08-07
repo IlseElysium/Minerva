@@ -97,9 +97,11 @@ function ChatFrame_OnEvent(event)
         return;
       end
     elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+0dhms]- ago|r.*") and not string.match(arg1, ".*Ticket Message.*") ) then
-      local ticketNumber = string.gsub(arg1, "|cffaaffaaTicket|r:|cffaaccff (%d+).+", "%1");
+      local ticketNumber = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff (%d+).+", "%1");
+      local ticketOwner = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:(%a+).+", "%1");
       if ( TICKETS_AMMOUNT <= 12 ) then
         getglobal("MinervaButton"..TICKETS_AMMOUNT.."Ticket"):SetText(ticketNumber);
+        getglobal("MinervaButton"..TICKETS_AMMOUNT.."Owner"):SetText(ticketOwner);
         if ( MinervaFrame.area and (tonumber((string.gsub(MinervaFrame.area:GetName(), "MinervaButton(%d+)", "%1"))) == TICKETS_AMMOUNT) ) then
           getglobal(MinervaFrame.area:GetName().."Background"):SetTexture(0.63671875, 0.1875, 0.1875);
           getglobal(MinervaFrame.area:GetName().."Border"):SetTexture(0, 0, 0);
@@ -109,10 +111,12 @@ function ChatFrame_OnEvent(event)
       if ( FILTER_TICKETS ) then
         return;
       end
-    elseif ( string.match(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+.|r |cff00ff00Ticket entry:|r|cffff00ff %d+.|r") ) then
-      local ticketNumber = string.gsub(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+.|r |cff00ff00Ticket entry:|r|cffff00ff (%d+).|r", "%1");
+    elseif ( string.match(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r") ) then
+      local ticketNumber = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
+      local ticketOwner = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff (%a+)%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
       if ( TICKETS_AMMOUNT <= 12 ) then
         getglobal("MinervaButton"..TICKETS_AMMOUNT.."Ticket"):SetText(ticketNumber);
+        getglobal("MinervaButton"..TICKETS_AMMOUNT.."Owner"):SetText(ticketOwner);
       end
       TICKETS_AMMOUNT = TICKETS_AMMOUNT + 1;
     end
