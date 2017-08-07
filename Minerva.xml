@@ -50,6 +50,9 @@
       </Layer>
     </Layers>
     <Scripts>
+      <OnLoad>
+        this:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+      </OnLoad>
       <OnEnter>
         MinervaFrame.area = this;
         if ( getglobal(this:GetName().."Ticket"):GetText() ) then
@@ -82,7 +85,11 @@
       </OnMouseUp>
       <OnClick>
         if ( getglobal(this:GetName().."Ticket"):GetText() ) then
-          SendChatMessage(".ticket "..getglobal(this:GetName().."Ticket"):GetText());
+          if ( arg1 == "LeftButton" ) then
+            SendChatMessage(".ticket "..getglobal(this:GetName().."Ticket"):GetText());
+          elseif ( arg1 == "RightButton" ) then
+            FriendsFrame_ShowDropdown(getglobal(this:GetName().."Owner"):GetText(), true);
+          end
         end
       </OnClick>
     </Scripts>
@@ -260,7 +267,9 @@
             end
           </OnMouseUp>
           <OnClick>
-            ChatFrame1:AddMessage("Refresh");
+            MinervaFrame.filter = false;
+            FILTER_TICKETS = true;
+            SendChatMessage(".ticket list");
           </OnClick>
         </Scripts>
       </Button>
