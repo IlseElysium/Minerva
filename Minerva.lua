@@ -124,8 +124,8 @@ function ChatFrame_OnEvent(event)
       end
       if ( key <= 12 ) then
         for i = key, 12 do
-          getglobal("MinervaButton"..key.."Ticket"):SetText(TICKETS[i]["number"]);
-          getglobal("MinervaButton"..key.."Owner"):SetText(TICKETS[i]["owner"]);
+          getglobal("MinervaButton"..i.."Ticket"):SetText(TICKETS[i]["number"]);
+          getglobal("MinervaButton"..i.."Owner"):SetText(TICKETS[i]["owner"]);
         end
       end
     end
