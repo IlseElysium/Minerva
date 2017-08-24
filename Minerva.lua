@@ -65,7 +65,7 @@ function ChatFrame_OnEvent(event)
   if ( event == "CHAT_MSG_SYSTEM" ) then
     if ( arg1 == MSG_GOLD ) then
       return;
-    elseif ( string.match(arg1, format(MSG_WELCOME, GetRealmName())) and FILTER_SYSTEM_WELCOME ) then
+    elseif ( string.match(arg1, format(MSG_WELCOME, GetRealmName())) and FILTER_SYSTEM_WELCOME or string.match(arg1, "Welcome to the test realm!") ) then
       FILTER_SYSTEM_WELCOME = false;
       return;
     elseif ( arg1 == "Showing list of open tickets." ) then
