@@ -116,8 +116,18 @@ function ChatFrame_OnEvent(event)
     elseif ( string.match(arg1, "|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r") ) then
       local ticketNumber = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
       local ticketOwner = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff (%a+) |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
-      -- TICKETS[?] = nil;
-      -- Ticket abandoned
+      for key, value in pairs(TICKETS) do
+        if TICKETS[key]["number"] == ticketNumber then
+          TICKETS.remove(key);
+          break
+        end
+      end
+      if ( key <= 12 ) then
+        for i = key, 12 do
+          getglobal("MinervaButton"..key.."Ticket"):SetText(TICKETS[i]["number"]);
+          getglobal("MinervaButton"..key.."Owner"):SetText(TICKETS[i]["owner"]);
+        end
+      end
     end
   elseif ( event == "GUILD_MOTD" ) then
     if ( FILTER_GUILD_MOTD ) then
