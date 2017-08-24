@@ -97,14 +97,18 @@ function ChatFrame_OnEvent(event)
       if ( FILTER_TICKETS ) then
         return;
       end
-    elseif ( string.match(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r") ) then
-      local ticketNumber = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
-      local ticketOwner = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff (%a+)%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
+    elseif ( string.match(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r") ) then
+      local ticketNumber = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
+      local ticketOwner = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff (%a+)%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
       if ( TICKET_NUMBER <= 12 ) then
         getglobal("MinervaButton"..TICKET_NUMBER.."Ticket"):SetText(ticketNumber);
         getglobal("MinervaButton"..TICKET_NUMBER.."Owner"):SetText(ticketOwner);
       end
       TICKET_NUMBER = TICKET_NUMBER + 1;
+    elseif ( string.match(arg1, "|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r") ) then
+      ChatFrame1:AddMessage("Ticket abandoned.");
+    elseif ( string.match(arg1, "|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00edited their ticket. Ticket entry:|r|cffff00ff %d+%.|r") ) then
+      ChatFrame1:AddMessage("Ticket edited.");
     end
   elseif ( event == "GUILD_MOTD" ) then
     if ( FILTER_GUILD_MOTD ) then
