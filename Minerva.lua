@@ -10,7 +10,6 @@ end
 FILTER_GUILD_MOTD = true;
 FILTER_SYSTEM_WELCOME = true;
 FILTER_TICKETS = true;
-TICKET_NUMBER = 1;
 TICKETS = {};
 
 GONAME = "Goname";
@@ -73,7 +72,6 @@ function ChatFrame_OnEvent(event)
         FILTER_TICKETS = false;
       end
       MinervaFrame.filter = true;
-      TICKET_NUMBER = 1;
       if ( FILTER_TICKETS ) then
         return;
       end
@@ -82,32 +80,31 @@ function ChatFrame_OnEvent(event)
         FILTER_TICKETS = false;
       end
       MinervaFrame.filter = true;
-      TICKET_NUMBER = 1;
-    elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+0dhms]- ago|r.*") and not string.match(arg1, ".*Ticket Message.*") ) then
+    elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+0dhms]- ago|r.*") and not string.match(arg1, ".*Ticket Message.*") and FILTER_TICKETS ) then
       local ticketNumber = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff (%d+).+", "%1");
       local ticketOwner = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:(%a+).+", "%1");
-      TICKETS[TICKET_NUMBER] = { number = ticketNumber, owner = ticketOwner };
-      if ( TICKET_NUMBER <= 12 ) then
-        getglobal("MinervaButton"..TICKET_NUMBER.."Ticket"):SetText(ticketNumber);
-        getglobal("MinervaButton"..TICKET_NUMBER.."Owner"):SetText(ticketOwner);
-        if ( MinervaFrame.area and (tonumber((string.gsub(MinervaFrame.area:GetName(), "MinervaButton(%d+)", "%1"))) == TICKET_NUMBER) ) then
+      local index = table.getn(TICKETS) + 1
+      TICKETS[index] = { number = ticketNumber, owner = ticketOwner };
+      if ( index <= 12 ) then
+        getglobal("MinervaButton"..index.."Ticket"):SetText(ticketNumber);
+        getglobal("MinervaButton"..index.."Owner"):SetText(ticketOwner);
+        if ( MinervaFrame.area and (tonumber((string.gsub(MinervaFrame.area:GetName(), "MinervaButton(%d+)", "%1"))) == index) ) then
           getglobal(MinervaFrame.area:GetName().."Background"):SetTexture(0.63671875, 0.1875, 0.1875);
           getglobal(MinervaFrame.area:GetName().."Border"):SetTexture(0, 0, 0);
         end
       end
-      TICKET_NUMBER = TICKET_NUMBER + 1;
       if ( FILTER_TICKETS ) then
         return;
       end
     elseif ( string.match(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r") ) then
       local ticketNumber = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
       local ticketOwner = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff (%a+)%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
+      local index = table.getn(TICKETS)
       table.insert(TICKETS, { number = ticketNumber, owner = ticketOwner })
       if ( table.getn(TICKETS)+1 <= 12 ) then
-        getglobal("MinervaButton"..TICKET_NUMBER.."Ticket"):SetText(ticketNumber);
-        getglobal("MinervaButton"..TICKET_NUMBER.."Owner"):SetText(ticketOwner);
+        getglobal("MinervaButton"..index.."Ticket"):SetText(ticketNumber);
+        getglobal("MinervaButton"..index.."Owner"):SetText(ticketOwner);
       end
-      TICKET_NUMBER = TICKET_NUMBER + 1;
     elseif ( string.match(arg1, "|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00edited their ticket. Ticket entry:|r|cffff00ff %d+%.|r") ) then
       local ticketNumber = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00edited their ticket. Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
       local ticketOwner = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff (%a+) |r|cff00ff00edited their ticket. Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
@@ -119,7 +116,6 @@ function ChatFrame_OnEvent(event)
       for key, value in pairs(TICKETS) do
         if TICKETS[key]["number"] == ticketNumber then
           table.remove(TICKETS, key);
-          TICKET_NUMBER = TICKET_NUMBER - 1;
           if ( key <= 12 ) then
             for i = key, 12 do
               if ( i < table.getn(TICKETS)+1 ) then
