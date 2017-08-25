@@ -118,11 +118,21 @@ function ChatFrame_OnEvent(event)
       local ticketOwner = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff (%a+) |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
       for key, value in pairs(TICKETS) do
         if TICKETS[key]["number"] == ticketNumber then
+          for i=1,TICKET_NUMBER-1do if(TICKETS[i])then ChatFrame1:AddMessage(i..' '..TICKETS[i]['number']..' '..TICKETS[i]['owner'])end end
           table.remove(TICKETS, key);
+          for i=1,TICKET_NUMBER-1do if(TICKETS[i])then ChatFrame1:AddMessage(i..' '..TICKETS[i]['number']..' '..TICKETS[i]['owner'])end end
+          ChatFrame1:AddMessage("key = "..key);
           TICKET_NUMBER = TICKET_NUMBER - 1;
+          ChatFrame1:AddMessage("TICKET_NUMBER = "..TICKET_NUMBER);
           if ( key <= 12 ) then
             for i = key, 12 do
+              ChatFrame1:AddMessage("i = "..i);
               if ( i < TICKET_NUMBER ) then
+                if ( not TICKETS[i] ) then
+                  ChatFrame1:AddMessage("ERROR");
+                  ChatFrame1:AddMessage(i);
+                  break
+                end
                 getglobal("MinervaButton"..i.."Ticket"):SetText(TICKETS[i]["number"]);
                 getglobal("MinervaButton"..i.."Owner"):SetText(TICKETS[i]["owner"]);
               elseif ( i == TICKET_NUMBER ) then
