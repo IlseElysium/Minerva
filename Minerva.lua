@@ -118,14 +118,20 @@ function ChatFrame_OnEvent(event)
       local ticketOwner = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff (%a+) |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
       for key, value in pairs(TICKETS) do
         if TICKETS[key]["number"] == ticketNumber then
-          TICKETS.remove(key);
+          table.remove(TICKETS, key);
+          TICKET_NUMBER = TICKET_NUMBER - 1;
+          if ( key <= 12 ) then
+            for i = key, 12 do
+              if ( i < TICKET_NUMBER ) then
+                getglobal("MinervaButton"..i.."Ticket"):SetText(TICKETS[i]["number"]);
+                getglobal("MinervaButton"..i.."Owner"):SetText(TICKETS[i]["owner"]);
+              elseif ( i == TICKET_NUMBER ) then
+                getglobal("MinervaButton"..i.."Ticket"):SetText("");
+                getglobal("MinervaButton"..i.."Owner"):SetText("");
+              end
+            end
+          end
           break
-        end
-      end
-      if ( key <= 12 ) then
-        for i = key, 12 do
-          getglobal("MinervaButton"..i.."Ticket"):SetText(TICKETS[i]["number"]);
-          getglobal("MinervaButton"..i.."Owner"):SetText(TICKETS[i]["owner"]);
         end
       end
     end
