@@ -64,10 +64,10 @@ function removeTicket(ticketNumber)
       table.remove(TICKETS, key);
       if ( key <= 12 ) then
         for i = key, 12 do
-          if ( i < table.getn(TICKETS)+1 ) then
+          if ( i < table.getn(TICKETS) + 1 ) then
             getglobal("MinervaButton"..i.."Ticket"):SetText(TICKETS[i]["number"]);
             getglobal("MinervaButton"..i.."Owner"):SetText(TICKETS[i]["owner"]);
-          elseif ( i == table.getn(TICKETS)+1 ) then
+          elseif ( i == table.getn(TICKETS) + 1 ) then
             getglobal("MinervaButton"..i.."Ticket"):SetText("");
             getglobal("MinervaButton"..i.."Owner"):SetText("");
           end
@@ -119,9 +119,9 @@ function ChatFrame_OnEvent(event)
     elseif ( string.match(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r") ) then
       local ticketNumber = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
       local ticketOwner = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff (%a+)%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
-      local index = table.getn(TICKETS)
+      local index = table.getn(TICKETS) + 1
       table.insert(TICKETS, { number = ticketNumber, owner = ticketOwner })
-      if ( table.getn(TICKETS)+1 <= 12 ) then
+      if ( table.getn(TICKETS) + 1 <= 12 ) then
         getglobal("MinervaButton"..index.."Ticket"):SetText(ticketNumber);
         getglobal("MinervaButton"..index.."Owner"):SetText(ticketOwner);
       end
