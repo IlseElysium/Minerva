@@ -58,6 +58,26 @@ SlashCmdList["RL"] = function()
   ReloadUI();
 end
 
+function removeTicket(ticketNumber)
+  for key, value in pairs(TICKETS) do
+    if TICKETS[key]["number"] == ticketNumber then
+      table.remove(TICKETS, key);
+      if ( key <= 12 ) then
+        for i = key, 12 do
+          if ( i < table.getn(TICKETS)+1 ) then
+            getglobal("MinervaButton"..i.."Ticket"):SetText(TICKETS[i]["number"]);
+            getglobal("MinervaButton"..i.."Owner"):SetText(TICKETS[i]["owner"]);
+          elseif ( i == table.getn(TICKETS)+1 ) then
+            getglobal("MinervaButton"..i.."Ticket"):SetText("");
+            getglobal("MinervaButton"..i.."Owner"):SetText("");
+          end
+        end
+      end
+      break
+    end
+  end
+end
+
 -- https://www.townlong-yak.com/framexml/1.12.1/ChatFrame.lua#1260
 local Original_ChatFrame_OnEvent = ChatFrame_OnEvent;
 function ChatFrame_OnEvent(event)
@@ -110,26 +130,12 @@ function ChatFrame_OnEvent(event)
       local ticketOwner = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff (%a+) |r|cff00ff00edited their ticket. Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
       -- TICKETS[?] = { number = ticketNumber, owner = ticketOwner };
       -- Ticket edited
+    elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff %a+|r |cff00ff00Closed by|r:|cff00ccff %a+|r ") ) then
+      local ticketNumber = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff (%d+)%.|r |cff00ff00Creator|r:|cff00ccff %a+|r |cff00ff00Closed by|r:|cff00ccff %a+|r $", "%1");
+      removeTicket(ticketNumber)
     elseif ( string.match(arg1, "|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r") ) then
       local ticketNumber = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
-      local ticketOwner = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff (%a+) |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
-      for key, value in pairs(TICKETS) do
-        if TICKETS[key]["number"] == ticketNumber then
-          table.remove(TICKETS, key);
-          if ( key <= 12 ) then
-            for i = key, 12 do
-              if ( i < table.getn(TICKETS)+1 ) then
-                getglobal("MinervaButton"..i.."Ticket"):SetText(TICKETS[i]["number"]);
-                getglobal("MinervaButton"..i.."Owner"):SetText(TICKETS[i]["owner"]);
-              elseif ( i == table.getn(TICKETS)+1 ) then
-                getglobal("MinervaButton"..i.."Ticket"):SetText("");
-                getglobal("MinervaButton"..i.."Owner"):SetText("");
-              end
-            end
-          end
-          break
-        end
-      end
+      removeTicket(ticketNumber)
     end
   elseif ( event == "GUILD_MOTD" ) then
     if ( FILTER_GUILD_MOTD ) then
