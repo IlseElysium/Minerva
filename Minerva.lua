@@ -104,22 +104,26 @@ function ChatFrame_OnEvent(event)
       MinervaFrame.filter = true;
       ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r list of online tickets:')
       return
-    elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+0dhms]- ago|r.*") and not string.match(arg1, ".*Ticket Message.*") and FILTER_TICKETS ) then
+    elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+dhms]- ago|r.*") and not string.match(arg1, ".*Ticket Message.*") ) then
       local ticketNumber = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff (%d+).+", "%1");
       local ticketOwner = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:(%a+).+", "%1");
-      local index = table.getn(TICKETS) + 1
-      TICKETS[index] = { number = ticketNumber, owner = ticketOwner };
-      if ( index <= 12 ) then
-        getglobal("MinervaButton"..index.."Ticket"):SetText(ticketNumber);
-        getglobal("MinervaButton"..index.."Owner"):SetText(ticketOwner);
-        if ( MinervaFrame.area and (tonumber((string.gsub(MinervaFrame.area:GetName(), "MinervaButton(%d+)", "%1"))) == index) ) then
-          getglobal(MinervaFrame.area:GetName().."Background"):SetTexture(0.63671875, 0.1875, 0.1875);
-          getglobal(MinervaFrame.area:GetName().."Border"):SetTexture(0, 0, 0);
-        end
-      end
       if ( FILTER_TICKETS ) then
-        return;
+        local index = table.getn(TICKETS) + 1
+        TICKETS[index] = { number = ticketNumber, owner = ticketOwner };
+        if ( index <= 12 ) then
+          getglobal("MinervaButton"..index.."Ticket"):SetText(ticketNumber);
+          getglobal("MinervaButton"..index.."Owner"):SetText(ticketOwner);
+          if ( MinervaFrame.area and (tonumber((string.gsub(MinervaFrame.area:GetName(), "MinervaButton(%d+)", "%1"))) == index) ) then
+            getglobal(MinervaFrame.area:GetName().."Background"):SetTexture(0.63671875, 0.1875, 0.1875);
+            getglobal(MinervaFrame.area:GetName().."Border"):SetTexture(0, 0, 0);
+          end
+        end
+      else
+        local ticketTime = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff ([%d+dhms]- ago)|r.*$", "%1");
+        local ticketExtras = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+dhms]- ago|r(.*)$", "%1");
+        ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' from |Hplayer:'..ticketOwner..'|h'..ticketOwner..'|h created '..ticketTime..'.'..ticketExtras);
       end
+      return
     elseif ( string.match(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r") ) then
       local ticketNumber = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
       local ticketOwner = string.gsub(arg1, "^|cff00ff00New ticket from|r|cffff00ff (%a+)%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
@@ -129,25 +133,25 @@ function ChatFrame_OnEvent(event)
         getglobal("MinervaButton"..index.."Ticket"):SetText(ticketNumber);
         getglobal("MinervaButton"..index.."Owner"):SetText(ticketOwner);
       end
-      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' created by '..ticketOwner)
+      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' created by |Hplayer:'..ticketOwner..'|h'..ticketOwner..'|h')
       return
     elseif ( string.match(arg1, "|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00edited their ticket. Ticket entry:|r|cffff00ff %d+%.|r") ) then
       local ticketNumber = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00edited their ticket. Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
       local ticketOwner = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff (%a+) |r|cff00ff00edited their ticket. Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
-      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' edited by '..ticketOwner)
+      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' edited by |Hplayer:'..ticketOwner..'|h'..ticketOwner..'|h')
       return
     elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff %a+|r |cff00ff00Closed by|r:|cff00ccff %a+|r ") ) then
       local ticketNumber = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff (%d+)%.|r |cff00ff00Creator|r:|cff00ccff %a+|r |cff00ff00Closed by|r:|cff00ccff %a+|r $", "%1");
       local ticketOwner = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff (%a+)|r |cff00ff00Closed by|r:|cff00ccff %a+|r $", "%1");
       local ticketCloser = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff %a+|r |cff00ff00Closed by|r:|cff00ccff (%a+)|r $", "%1");
       removeTicket(ticketNumber)
-      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' from '..ticketOwner..' closed by '..ticketCloser)
+      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' from |Hplayer:'..ticketOwner..'|h'..ticketOwner..'|h closed by '..ticketCloser)
       return
     elseif ( string.match(arg1, "|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r") ) then
       local ticketNumber = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
       local ticketOwner = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff (%a+) |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r$", "%1");
       removeTicket(ticketNumber)
-      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' deleted by '..ticketOwner)
+      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' deleted by |Hplayer:'..ticketOwner..'|h'..ticketOwner..'|h')
       return
     end
   elseif ( event == "GUILD_MOTD" ) then
