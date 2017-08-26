@@ -120,8 +120,14 @@ function ChatFrame_OnEvent(event)
         end
       else
         local ticketTime = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff ([%d+dhms]- ago)|r.*$", "%1");
-        local ticketExtras = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+dhms]- ago|r(.*)$", "%1");
-        ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' from |Hplayer:'..ticketOwner..'|h'..ticketOwner..'|h created '..ticketTime..'.'..ticketExtras);
+        local ticketExtras = "";
+        if string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+dhms]- ago|r |cff00ff00Changed|r:|cff00ccff [%d+dhms]- ago|r.*") then
+          ticketExtras = ' changed '..string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+dhms]- ago|r |cff00ff00Changed|r:|cff00ccff ([%d+dhms]- ago)|r.*$", "%1");
+        end
+        if string.match(arg1, ".* |cff00ff00Assigned to|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r ") then
+          ticketExtras = ticketExtras..' assigned to '..string.gsub(arg1, ".* |cff00ff00Assigned to|r:|cff00ccff |cffffffff|Hplayer:(%a+)|h%[%a+%]|h|r|r $", "%1");
+        end
+        ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r '..ticketNumber..' from |Hplayer:'..ticketOwner..'|h'..ticketOwner..'|h created '..ticketTime..ticketExtras..'.');
       end
       return
     elseif ( string.match(arg1, "|cff00ff00New ticket from|r|cffff00ff %a+%.|r |cff00ff00Category:|r|cffff00ff %a+%.|r |cff00ff00Ticket entry:|r|cffff00ff %d+%.|r") ) then
