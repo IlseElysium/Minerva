@@ -95,11 +95,15 @@ function ChatFrame_OnEvent(event)
       if ( FILTER_TICKETS ) then
         return;
       end
+      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r list of all tickets:')
+      return
     elseif ( arg1 == "Showing list of open tickets whose creator is online." ) then
       if ( MinervaFrame.filter ) then
         FILTER_TICKETS = false;
       end
       MinervaFrame.filter = true;
+      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r list of online tickets:')
+      return
     elseif ( string.match(arg1, "|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:%a+|h%[%a+%]|h|r|r |cff00ff00Created|r:|cff00ccff [%d+0dhms]- ago|r.*") and not string.match(arg1, ".*Ticket Message.*") and FILTER_TICKETS ) then
       local ticketNumber = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff (%d+).+", "%1");
       local ticketOwner = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff |cffffffff|Hplayer:(%a+).+", "%1");

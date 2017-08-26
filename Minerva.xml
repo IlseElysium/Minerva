@@ -206,7 +206,7 @@
           </OnClick>
         </Scripts>
       </Button>
-      <Button name="MinervaButtonRefresh" parent="MinervaButtonClose">
+      <Button name="MinervaButtonReload" parent="MinervaButtonClose">
         <Size x="65" y="22"/>
         <Anchors>
           <Anchor point="LEFT" relativePoint="RIGHT">
@@ -222,7 +222,7 @@
             </Texture>
           </Layer>
           <Layer level="BORDER">
-            <FontString name="$parentText" inherits="GameFontHighlight" text="Refresh" justifyH="CENTER">
+            <FontString name="$parentText" inherits="GameFontHighlight" text="Reload" justifyH="CENTER">
               <Anchors>
                 <Anchor point="CENTER">
                   <Offset>
@@ -241,35 +241,33 @@
           <OnEnter>
             this.MouseArea = true;
             if ( this.MouseState ) then
-              MinervaButtonRefreshBackground:SetTexture(0.57421875, 0.16796875, 0.16796875);
+              MinervaButtonReloadBackground:SetTexture(0.57421875, 0.16796875, 0.16796875);
             end
           </OnEnter>
           <OnLeave>
             this.MouseArea = false;
             if ( this.MouseState ) then
-              MinervaButtonRefreshBackground:SetTexture(0.63671875, 0.1875, 0.1875);
+              MinervaButtonReloadBackground:SetTexture(0.63671875, 0.1875, 0.1875);
             end
           </OnLeave>
           <OnMouseDown>
             if ( arg1 == "LeftButton" ) then
               this.MouseState = false;
-              MinervaButtonRefreshBackground:SetTexture(0.5078125, 0.1484375, 0.1484375);
+              MinervaButtonReloadBackground:SetTexture(0.5078125, 0.1484375, 0.1484375);
             end
           </OnMouseDown>
           <OnMouseUp>
             if ( arg1 == "LeftButton" ) then
               this.MouseState = true;
               if ( this.MouseArea ) then
-                MinervaButtonRefreshBackground:SetTexture(0.57421875, 0.16796875, 0.16796875);
+                MinervaButtonReloadBackground:SetTexture(0.57421875, 0.16796875, 0.16796875);
               else
-                MinervaButtonRefreshBackground:SetTexture(0.63671875, 0.1875, 0.1875);
+                MinervaButtonReloadBackground:SetTexture(0.63671875, 0.1875, 0.1875);
               end
             end
           </OnMouseUp>
           <OnClick>
-            MinervaFrame.filter = false;
-            FILTER_TICKETS = true;
-            SendChatMessage(".ticket list");
+            ReloadUI();
           </OnClick>
         </Scripts>
       </Button>
