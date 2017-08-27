@@ -152,6 +152,7 @@ function ChatFrame_OnEvent(event)
       local ticketOwner = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff (%a+)|r |cff00ff00Closed by|r:|cff00ccff %a+|r $", "%1");
       local ticketCloser = string.gsub(arg1, "^|cffaaffaaTicket|r:|cffaaccff %d+%.|r |cff00ff00Creator|r:|cff00ccff %a+|r |cff00ff00Closed by|r:|cff00ccff (%a+)|r $", "%1");
       removeTicket(ticketNumber)
+      ChatFrame1:AddMessage('|cffE74C3C[Ticket]|r |cffF1C40F'..ticketNumber..'|r from |cff3498DB|Hplayer:'..ticketOwner..'|h'..ticketOwner..'|h|r closed by |cff71368A|Hplayer:'..ticketCloser..'|h'..ticketCloser..'|h|r.')
       return
     elseif ( string.match(arg1, "|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff %d+%.|r") ) then
       local ticketNumber = string.gsub(arg1, "^|cff00ff00Character|r|cffff00ff %a+ |r|cff00ff00abandoned their ticket. Ticket entry:|r|cffff00ff (%d+)%.|r$", "%1");
